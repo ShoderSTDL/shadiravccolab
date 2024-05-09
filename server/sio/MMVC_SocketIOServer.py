@@ -14,7 +14,7 @@ class MMVC_SocketIOServer:
         allowedOrigins: list[str],
     ):
         if cls._instance is None:
-            sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
+            sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins=allowedOrigins)
             namespace = MMVC_Namespace.get_instance(voiceChangerManager)
             sio.register_namespace(namespace)
             cls._instance = sio
