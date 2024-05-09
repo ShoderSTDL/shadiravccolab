@@ -9,7 +9,7 @@ def compute_local_origins(port: Optional[int] = None) -> list[str]:
     local_origins = [f'{schema}://{origin}' for schema in SCHEMAS for origin in LOCAL_ORIGINS]
     if port is not None:
         local_origins = [f'{origin}:{port}' for origin in local_origins]
-    local_origins.append("*")
+    local_origins.add('*')
     return local_origins
 
 
