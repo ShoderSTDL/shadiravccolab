@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 
 ENFORCE_URL_ORIGIN_FORMAT = "Input origins must be well-formed URLs, i.e. https://google.com or https://www.google.com."
 SCHEMAS = ('http', 'https')
-LOCAL_ORIGINS = ('127.0.0.1', 'localhost', '*')
+LOCAL_ORIGINS = ('127.0.0.1', 'localhost')
 
 def compute_local_origins(port: Optional[int] = None) -> list[str]:
     local_origins = [f'{schema}://{origin}' for schema in SCHEMAS for origin in LOCAL_ORIGINS]
@@ -21,4 +21,5 @@ def normalize_origins(origins: Sequence[str]) -> set[str]:
         if url.port:
             valid_origin += f':{url.port}'
         allowed_origins.add(valid_origin)
+    allowed_origins.add('*')
     return allowed_origins
