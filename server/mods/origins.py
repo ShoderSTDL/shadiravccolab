@@ -9,7 +9,6 @@ def compute_local_origins(port: Optional[int] = None) -> list[str]:
     local_origins = [f'{schema}://{origin}' for schema in SCHEMAS for origin in LOCAL_ORIGINS]
     if port is not None:
         local_origins = [f'{origin}:{port}' for origin in local_origins]
-    local_origins.add('*')
     return local_origins
 
 
@@ -22,4 +21,5 @@ def normalize_origins(origins: Sequence[str]) -> set[str]:
         if url.port:
             valid_origin += f':{url.port}'
         allowed_origins.add(valid_origin)
+    allowed_origins.add('*')
     return allowed_origins
